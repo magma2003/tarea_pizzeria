@@ -24,7 +24,7 @@ const validarDatos = (e) => {
     return;
   }
 
-  if (password !== confirmPassword) {
+  if (password.trim() !== confirmPassword.trim()) {
     setMessage('Las contraseñas no coinciden');
     setMessageType('error');
     return;
