@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import CardPizza from './CardPizza';
+import { pizzas } from '../assets/resources/pizzas.js';
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
 
       <div className="container my-3">
         <div className="row">
+     {/*  
           <div className="col-12 col-md-4">            
               <CardPizza
                 name="Napolitana"
@@ -33,6 +35,16 @@ const Home = () => {
                 img="https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_com.jpg?alt=media&token=e7cde87a-08d5-4040-ac54-90f6c31eb3e3"
               />         
           </div>
+      */} 
+
+            {pizzas.map(prod => (
+              <div className="col-12 col-md-4" key={prod.id}>
+                <CardPizza prod={prod} />
+              </div>
+            ))}
+
+     
+
         </div>
       </div>
     </div>

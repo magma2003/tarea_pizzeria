@@ -18,4 +18,5 @@ Hito1: Introducción a React
 
 Hito2: Estado de los componentes y eventos
 
+Hito3: Renderización dinámica de componentes
 
