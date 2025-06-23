@@ -15,9 +15,10 @@ function App() {
       <Navbar />
       <p></p>
 
-{/* 
       <Home /> 
       <p></p>
+{/* 
+
     
       <Register />
       <p></p>     
@@ -28,9 +29,10 @@ function App() {
       <Cart />
       <p></p>  
 
+  
   */}
-      <Pizza />
-      <p></p>
+       <Pizza />
+      <p></p>   
 
       <Footer />   
       <p></p>   
