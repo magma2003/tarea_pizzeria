@@ -6,6 +6,7 @@ import Login from './components/Login'
 import Navbar from './components/Navbar'
 import Register from './components/Register'
 import Cart from './components/Cart'
+import Pizza from './components/Pizza'
 
 function App() {
 
@@ -14,21 +15,23 @@ function App() {
       <Navbar />
       <p></p>
 
- {/*     
+{/* 
       <Home /> 
       <p></p>
-
+    
       <Register />
       <p></p>     
 
       <Login />
       <p></p>
-      
-  */}
-
+ 
       <Cart />
+      <p></p>  
+
+  */}
+      <Pizza />
       <p></p>
-      
+
       <Footer />   
       <p></p>   
     </>
