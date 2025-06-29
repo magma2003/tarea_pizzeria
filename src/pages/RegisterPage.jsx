@@ -1,42 +1,50 @@
 import React, { useState } from 'react';
 
-const Login = () => {
-      const [email, setEmail] = useState('');
-      const [password, setPassword] = useState('');
-      const [message, setMessage] = useState('');
-      const [messageType, setMessageType] = useState('');
-    
-      // Función para manejar el envío del formulario
-    const validarDatos = (e) => {
-      e.preventDefault();
-    
-      // Validaciones
-      if (!email.trim() || !password.trim()) {
-        setMessage('Todos los campos son obligatorios');
-        setMessageType('error');
-        return;
-      }
-    
-      if (password.trim().length < 6) {
-        setMessage('La contraseña debe tener al menos 6 caracteres');
-        setMessageType('error');
-        return;
-      }
-    
-      // Si pasa todas las validaciones
-      setMessage('Login exitoso!');
-      setMessageType('success');
-    
-      // Limpiar campos
-      setEmail('');
-      setPassword('');
-    
-      // Borrar mensaje luego de 3 segundos
-      setTimeout(() => {
-        setMessage('');
-        setMessageType('');
-      }, 3000);
-    };
+const RegisterPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
+
+  // Función para manejar el envío del formulario
+const validarDatos = (e) => {
+  e.preventDefault();
+
+  // Validaciones
+  if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
+    setMessage('Todos los campos son obligatorios');
+    setMessageType('error');
+    return;
+  }
+
+  if (password.trim().length < 6) {
+    setMessage('La contraseña debe tener al menos 6 caracteres');
+    setMessageType('error');
+    return;
+  }
+
+  if (password.trim() !== confirmPassword.trim()) {
+    setMessage('Las contraseñas no coinciden');
+    setMessageType('error');
+    return;
+  }
+
+  // Si pasa todas las validaciones
+  setMessage('¡Registro exitoso!');
+  setMessageType('success');
+
+  // Limpiar campos
+  setEmail('');
+  setPassword('');
+  setConfirmPassword('');
+
+  // Borrar mensaje luego de 3 segundos
+  setTimeout(() => {
+    setMessage('');
+    setMessageType('');
+  }, 3000);
+};
 
   return (
     <div className="container mt-5">
@@ -69,9 +77,19 @@ const Login = () => {
                   />
                 </div>
 
+                <div className="mb-3">
+                  <label htmlFor="confirmPassword" className="form-label">
+                    Confirmar Contraseña
+                  </label>
+                  <input type="password" className="form-control" id="confirmPassword" value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirma tu contraseña"
+                  />
+                </div>
+
                 <div className="d-grid">
                   <button type="submit" className="btn btn-primary">
-                    Login
+                    Registrarse
                   </button>
                 </div>
               </form>
@@ -86,7 +104,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default RegisterPage;

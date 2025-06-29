@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const total = 25000;
@@ -11,25 +12,25 @@ const Navbar = () => {
       <div className="container-fluid d-flex justify-content-between align-items-center">
         {/* Botones izquierdos */}
         <div className="d-flex gap-2">
-          <button className="btn btn-dark border border-white text-white">🍕 Home</button>
+          <Link to="/" className="btn btn-dark border border-white text-white">🍕 Home</Link>
           {token ? (
             <>
-              <button className="btn btn-dark border border-white text-white">🔓 Profile</button>
-              <button className="btn btn-dark border border-white text-white">🔒 Logout</button>
+              <Link to="/profile" className="btn btn-dark border border-white text-white">🔓 Profile</Link>
+              <Link to="/login" className="btn btn-dark border border-white text-white">🔒 Logout</Link>
             </>
           ) : (
             <>
-              <button className="btn btn-dark border border-white text-white">🔐 Login</button>
-              <button className="btn btn-dark border border-white text-white">🔐 Register</button>
+              <Link to="/login" className="btn btn-dark border border-white text-white">🔐 Login</Link>
+              <Link to="/register" className="btn btn-dark border border-white text-white">🔐 Register</Link>
             </>
           )}
         </div>
 
         {/* Botón total a la derecha */}
         <div>
-          <button className="btn btn-dark border border-info text-info">
+          <Link to="/cart" className="btn btn-dark border border-info text-info">
             🛒 Total: ${total.toLocaleString()}
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

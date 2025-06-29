@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { pizzaCart } from '../assets/resources/pizzas.js';
 
-const Cart = () => {
+const CartPage = () => {
   const [items, setItems] = useState(pizzaCart);
 
   const actualizarCantidad = (id, delta) => {
@@ -71,4 +71,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartPage;
