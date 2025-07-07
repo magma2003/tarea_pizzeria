@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { CartContext } from '../components/CartContext.jsx';
 import Header from '../components/Header.jsx';
 import CardPizza from '../components/CardPizza.jsx';
 import { pizzas } from '../assets/resources/pizzas.js';
 
+
 const HomePage = () => {
   const [pizzas, setpizzas] = useState([]);
+  const { addToCart } = useContext(CartContext);
   
   useEffect(() => {
     consultarApi();
@@ -89,7 +93,9 @@ const HomePage = () => {
                   <button className="btn btn-outline-dark">
                       Ver Más 👀
                   </button>
-                  <button className="btn btn-dark">
+                  <button className="btn btn-dark"  
+                    onClick={() => addToCart({...pizza, count: 1})}
+                  >
                       Añadir 🛒
                   </button>
                 </div>

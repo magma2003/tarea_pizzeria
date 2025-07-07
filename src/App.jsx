@@ -10,27 +10,31 @@ import CartPage from './pages/CartPage'
 import PizzaPage from './pages/PizzaPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage'
+import CartProvider from './components/CartContext'
+import Cart from './pages/Cart'
 
 function App() {
 
   return (
     <>      
-      <Navbar />
-      <p></p>
-      
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/pizza" element={<PizzaPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/*" element={<NotFoundPage />} />
-      </Routes>
-      <p></p>
+      <CartProvider> 
+        <Navbar />
+        <p></p>
+        
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/pizza" element={<PizzaPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/*" element={<NotFoundPage />} />
+        </Routes>
+        <p></p>
 
-      <Footer />   
-      <p></p>   
+        <Footer />   
+        <p></p>
+      </CartProvider>   
     </>
   )
 }
