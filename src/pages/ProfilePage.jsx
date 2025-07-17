@@ -1,10 +1,7 @@
 import React from 'react'
 
 const ProfilePage = () => {
-  return (
- /*
-    <div>perfil</div>
-  */          
+  return (       
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">

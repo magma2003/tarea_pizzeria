@@ -1,10 +1,18 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { CartContext } from './CartContext'; 
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContexts';
+import { CartContext } from './CartContext';
+
 
 const Navbar = () => {
   const { calculateTotal } = useContext(CartContext);
-  const token = false;
+  const { token, logout } = useContext(UserContext); // Obtenemos token y logout
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();       // Elimina el token del contexto
+    navigate('/');  // Redirige al home luego del logout
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
@@ -16,13 +24,14 @@ const Navbar = () => {
           <Link to="/" className="btn btn-dark border border-white text-white">🍕 Home</Link>
           {token ? (
             <>
-              <Link to="/profile" className="btn btn-dark border border-white text-white">🔓 Profile</Link>
-              <Link to="/login" className="btn btn-dark border border-white text-white">🔒 Logout</Link>
+              <NavLink to="/profile" className="btn btn-dark border border-white text-white">🔓 Profile</NavLink>
+              {/* <NavLink to="/login" className="btn btn-dark border border-white text-white">🔒 Logout</NavLink> */}
+              <button onClick={handleLogout} className="btn btn-dark border border-white text-white">🔒 Logout</button>
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-dark border border-white text-white">🔐 Login</Link>
-              <Link to="/register" className="btn btn-dark border border-white text-white">🔐 Register</Link>
+              <NavLink to="/login" className="btn btn-dark border border-white text-white">🔐 Login</NavLink>
+              <NavLink to="/register" className="btn btn-dark border border-white text-white">🔐 Register</NavLink>
             </>
           )}
         </div>

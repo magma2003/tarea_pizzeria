@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../components/CartContext';
-
+import { UserContext } from '../contexts/UserContexts'; // 👈 Importa el contexto
 
 const Cart = () => {
   const { cart, addToCart, removeFromCart, calculateTotal } = useContext(CartContext);
+  const { token } = useContext(UserContext); // 👈 Extrae el token
 
   const actualizarCantidad = (id, delta) => {
     const item = cart.find(i => i.id === id);
@@ -67,7 +68,9 @@ const Cart = () => {
       {/* Total y pagar */}
       <div className="d-flex justify-content-between align-items-center mt-4">
         <h4>Total: ${calculateTotal().toLocaleString()}</h4>
-        <button className="btn btn-dark btn-lg">Pagar</button>
+        <button className="btn btn-dark btn-lg" disabled={!token}>
+          Pagar
+        </button>
       </div>
     </main>
   );
