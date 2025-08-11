@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContexts";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -7,44 +9,45 @@ const RegisterPage = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
+  const { register } = useContext(UserContext);
+  const navigate = useNavigate();
+
   // Función para manejar el envío del formulario
-const validarDatos = (e) => {
-  e.preventDefault();
+  const validarDatos = async (e) => {
+    e.preventDefault();
 
-  // Validaciones
-  if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
-    setMessage('Todos los campos son obligatorios');
-    setMessageType('error');
-    return;
-  }
+    // Validaciones
+    if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
+      setMessage('Todos los campos son obligatorios');
+      setMessageType('error');
+      return;
+    }
 
-  if (password.trim().length < 6) {
-    setMessage('La contraseña debe tener al menos 6 caracteres');
-    setMessageType('error');
-    return;
-  }
+    if (password.trim().length < 6) {
+      setMessage('La contraseña debe tener al menos 6 caracteres');
+      setMessageType('error');
+      return;
+    }
 
-  if (password.trim() !== confirmPassword.trim()) {
-    setMessage('Las contraseñas no coinciden');
-    setMessageType('error');
-    return;
-  }
+    if (password.trim() !== confirmPassword.trim()) {
+      setMessage('Las contraseñas no coinciden');
+      setMessageType('error');
+      return;
+    }
 
-  // Si pasa todas las validaciones
-  setMessage('¡Registro exitoso!');
-  setMessageType('success');
+    try {
+      await register(email, password); // Llamamos al backend
+      setMessage("¡Registro exitoso!");
+      setMessageType("success");
 
-  // Limpiar campos
-  setEmail('');
-  setPassword('');
-  setConfirmPassword('');
-
-  // Borrar mensaje luego de 3 segundos
-  setTimeout(() => {
-    setMessage('');
-    setMessageType('');
-  }, 3000);
-};
+      setTimeout(() => {
+        navigate("/perfil"); // redirige al perfil
+      }, 1000);
+    } catch (error) {
+      setMessage("Error en registro: " + error.message);
+      setMessageType("error");
+    }
+  };
 
   return (
     <div className="container mt-5">

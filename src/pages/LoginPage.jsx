@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContexts";
 
 const LoginPage = () => {
-      const [email, setEmail] = useState('');
-      const [password, setPassword] = useState('');
-      const [message, setMessage] = useState('');
-      const [messageType, setMessageType] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const [messageType, setMessageType] = useState('');
     
-      // Función para manejar el envío del formulario
-    const validarDatos = (e) => {
+    const { login } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    // Función para manejar el envío del formulario
+    const validarDatos = async (e) => {
       e.preventDefault();
     
       // Validaciones
@@ -23,19 +28,18 @@ const LoginPage = () => {
         return;
       }
     
-      // Si pasa todas las validaciones
-      setMessage('Login exitoso!');
-      setMessageType('success');
-    
-      // Limpiar campos
-      setEmail('');
-      setPassword('');
-    
-      // Borrar mensaje luego de 3 segundos
-      setTimeout(() => {
-        setMessage('');
-        setMessageType('');
-      }, 3000);
+      try {
+        await login(email, password); // Llamamos al backend
+        setMessage("¡Login exitoso!");
+        setMessageType("success");
+
+        setTimeout(() => {
+          navigate("/profile"); // redirige a la página de perfil
+        }, 1000);
+      } catch (error) {
+        setMessage("Error en login: " + error.message);
+        setMessageType("error");
+      }
     };
 
   return (

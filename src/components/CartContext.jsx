@@ -16,6 +16,20 @@ const CartProvider = ({ children }) => {
         return [...prev, item];
         }
     });
+  };
+
+  const updateQuantity = (id, delta) => {
+  setCart(prev =>
+    prev
+      .map(item =>
+        item.id === id ? { ...item, count: item.count + delta } : item
+      )
+      .filter(item => item.count > 0) // elimina los que queden en 0
+    );
+  };
+
+  const clearCart = () => {
+  setCart([]);
 };
 
   const removeFromCart = (id) => {
@@ -27,7 +41,7 @@ const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, calculateTotal }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, calculateTotal, clearCart }}>
       {children}
     </CartContext.Provider>
   );
